@@ -14,11 +14,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('reports', function (Blueprint $table) {
-            $table->string('title');
             $table->text('description');
-            $table->timestamp('datetime');
             $table->string('status');
             $table->unsignedBigInteger('project_id');
+            $table->foreign('project_id')->references('id')->on('projects');
             $table->timestamps();
             $table->softDeletes();
         });

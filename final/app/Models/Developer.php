@@ -11,11 +11,11 @@ class Developer extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['name', 'contact'];
+    protected $fillable = ['name'];
 
-    public function project(): BelongsToMany
+    public function projects(): BelongsToMany
     {
-        return $this->belongsToMany(Project::class);
+        return $this->belongsToMany(Project::class, 'project_developers', 'developer_id', 'project_id');
     }
 
 }

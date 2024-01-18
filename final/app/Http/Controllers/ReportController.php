@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Report;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -15,20 +16,19 @@ class ReportController extends Controller
     }
 
     // Show the form for creating a new report.
-    public function create()
+    public function create($projectId)
     {
-        return view('reports.create');
+        $project = Project::findOrFail($projectId);
+        return view('reports.create', compact('project'));
     }
 
     // Store a newly created report in storage.
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
-            'datetime' => 'required|date',
-            'status' => 'required',
-            'project_id' => 'required|exists:projects,id'
+            'project_id' => 'required|exists:projects,id',
+            'description' => 'required|string',
+            'status' => 'required|in:ahead_of_schedule,on_schedule,delayed,completed',
         ]);
 
         Report::create($validatedData);

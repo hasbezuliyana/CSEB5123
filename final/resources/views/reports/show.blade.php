@@ -3,11 +3,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Report: {{ $report->id }}</h1>
-    <p>Title: {{ $report->title }}</p>
-    <p>Description: {{ $report->description }}</p>
-    <p>Datetime: {{ $report->datetime }}</p>
-    <p>Status: {{ $report->status }}</p>
-    <p>Project ID: {{ $report->project_id }}</p>
-    <a href="{{ route('$report.index') }}">Back to List</a>
+    <div class="container">
+        <div>
+            <p><strong>Project Name:</strong> {{ $report->project->project_name ?? 'N/A' }}</p>
+            <p><strong>Status:</strong> {{ ucwords(str_replace('_', ' ', $report->status)) }}</p>
+            <p><strong>Report Details:</strong> {{ $report->description }}</p>
+        </div>
+    <a href="{{ route('$reports.index') }}">Back to List</a>
+    </div>
 @endsection

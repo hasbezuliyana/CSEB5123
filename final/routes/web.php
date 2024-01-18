@@ -36,8 +36,18 @@ Route::get('/request-form', function() {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/about-us', [HomeController::class, 'aboutUs'])->name('aboutus');
+Route::get('/welcome', [HomeController::class, 'welcome'])->name('welcome');
+Route::get('/contact-us', [HomeController::class, 'contactUs'])->name('contactus');
 Route::get('/managers', [ManagerController::class, 'index'])->name('managers');
-
+Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+Route::get('/projects/{project}/assign', [ProjectController::class, 'update'])->name('projects.update');
+Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
+Route::get('/reports/create', [ReportController::class, 'create'])->name('reports.create');
+Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+Route::get('/reports/create/{projectId}', [ReportController::class, 'create'])->name('reports.create');
+Route::post('/reports', [ReportController::class, 'store'])->name('reports.store');
+Route::get('/reports/{report}', [ReportController::class, 'show'])->name('reports.show');
 
 // Grouped routes with authentication middleware
 Route::group(['middleware' => 'auth'], function () {

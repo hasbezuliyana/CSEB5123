@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\Developer;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -38,23 +40,27 @@ class ProjectController extends Controller
 
     public function show($id)
     {
-        $project = Project::findOrFail($id);
+        $project = Project::with('developers','reports')->findOrFail($id);
         return view('projects.show', compact('project'));
     }
 
     public function edit(Project $project)
     {
-        return view('projects.edit', compact('project'));
+        $developers = Developer::take(8)->get();
+        return view('projects.assign', compact('project', 'developers'));
     }
 
     public function update(Request $request, Project $project)
     {
         $validatedData = $request->validate([
-            // Add validation rules based on your project fields
+            'developers' => 'required|array|max:4',
+            'developers.*' => 'exists:developers,id',
         ]);
 
-        $project->update($validatedData);
-        return redirect()->route('projects.index')->with('success', 'Project updated successfully.');
+        $syncData = array_fill_keys($validatedData['developers'], ['status' => 'assigned']);
+        $project->developers()->sync($syncData);
+
+        return redirect()->route('projects.show', $project->id)->with('success', 'Developers assigned successfully.');
     }
 
     public function destroy(Project $project)
@@ -63,3 +69,4 @@ class ProjectController extends Controller
         return redirect()->route('projects.index')->with('success', 'Project deleted successfully.');
     }
 }
+

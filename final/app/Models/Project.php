@@ -20,11 +20,11 @@ class Project extends Model
     {
         return $this->belongsTo(Bu::class);
     }
-    public function developer(): BelongsToMany
+    public function developers(): BelongsToMany
     {
-        return $this->belongsToMany(Developer::class);
+        return $this->belongsToMany(Developer::class, 'project_developers', 'project_id', 'developer_id');
     }
-    public function report(): HasMany
+    public function reports(): HasMany
     {
         return $this->hasMany(Report::class);
     }

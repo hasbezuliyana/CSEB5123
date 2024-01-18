@@ -16,10 +16,7 @@
 
 <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url('/') }}">
-           {{-- <img src="{{ asset('uniten.png') }}" alt="Logo" style="height: 50px;">--}}
-        </a>
-        <a class="navbar-brand" href="#">           UNITEN ITMS</a>
+        <a class="navbar-brand" href="{{ route('welcome') }}">UNITEN ITMS</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -65,38 +62,42 @@
 
 <div class="container py-4">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-3">
             <div class="card overflow-hidden">
-                <div class="card-body">
-                    <nav class="bg-primary sidebar">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link active text-white" aria-current="page" href="#">
-                                    Home
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="{{ route('requestform') }}">
-                                    Request Form
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="{{ route('managers.index') }}">
-                                    Manager
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="{{ route('developers.index') }}">
-                                    Developers
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white" href="{{ route('projects.index') }}">
-                                    Projects
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                <div class="card-body bg-primary">
+                    <ul class="nav flex-column gap-2">
+                        <li class="nav-item">
+                            <a class="nav-link active text-white" aria-current="page" href="{{ route('welcome') }}">
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ route('requestform') }}">
+                                Request Form
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ route('managers.index') }}">
+                                Manager
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ route('developers.index') }}">
+                                Developers
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ route('projects.index') }}">
+                                Projects
+                            </a>
+                        </li>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ route('reports.index') }}">
+                                Reports
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

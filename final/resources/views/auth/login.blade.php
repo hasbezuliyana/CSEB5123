@@ -24,35 +24,28 @@
     </style>--}}
 </head>
 <body class="antialiased">
-<nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-themes="dark">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('home') }}">UNITEN ITMS</a>
+        <a class="navbar-brand" href="{{ route('welcome') }}">UNITEN ITMS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">Register</a>
-                </li>
-            </ul>
-        </div>
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item nav-item-custom">
+                <a class="nav-link" href="{{ route('login') }}">Login</a>
+            </li>
+            <li class="nav-item nav-item-custom">
+                <a class="nav-link" href="{{ route('register') }}">Register</a>
+            </li>
+        </ul>
+    </div>
     </div>
 </nav>
 
 <div class="container h-100 d-flex justify-content-center align-items-center">
     <div class="my-form">
+        <p></p>
         <h2 class="text-center">Hi, Welcome to UNITEN ITMS</h2>
-
         <form method="POST" action="{{ route('login') }}">
             @csrf <!-- This is essential for Laravel forms for CSRF protection -->
             <div class="form-group">

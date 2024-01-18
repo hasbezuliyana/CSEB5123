@@ -11,7 +11,7 @@ class Report extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['title', 'description', 'datetime', 'status', 'project_id'];
+    protected $fillable = ['description', 'status', 'project_id'];
 
     public function project(): BelongsTo
     {

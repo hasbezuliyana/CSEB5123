@@ -9,12 +9,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('project_developers', function (Blueprint $table) {
-            $table->id();
             $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('developer_id');
-            $table->string('status');
+            $table->string('status')->default('completed');;
             $table->foreign('project_id')->references('id')->on('projects');
             $table->foreign('developer_id')->references('id')->on('developers');
+            $table->primary(['project_id', 'developer_id']);
             $table->timestamps();
             $table->softDeletes();
         });

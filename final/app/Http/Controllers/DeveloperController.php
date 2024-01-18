@@ -40,7 +40,8 @@ class DeveloperController extends Controller
     // Show the form for editing the specified developer.
     public function edit(Developer $developer)
     {
-        return view('developers.edit', compact('developer'));
+        $developers = Developer::all(); // Fetch all developers
+        return view('projects.assign', compact('project', 'developers'));return view('developers.edit', compact('developer'));
     }
 
     // Update the specified developer in storage.
