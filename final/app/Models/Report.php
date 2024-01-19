@@ -18,4 +18,10 @@ class Report extends Model
         return $this->belongsTo(Project::class);
     }
 
+    // In Report model
+    public function getRouteKeyName()
+    {
+        return 'id';
+    }
+
 }

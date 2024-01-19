@@ -24,14 +24,15 @@ class ProjectDeveloperController extends Controller
             'project_id' => 'required|exists:projects,id',
             'developer_id' => 'required|exists:developers,id',
             'datetime' => 'required|date',
-            'status' => 'required'
+            'status' => 'required',
+            'is_lead' => 'required|boolean',
+
         ]);
 
         ProjectDeveloper::create($validatedData);
         return redirect()->route('project_developers.index')->with('success', 'Association created successfully.');
     }
 
-    // Display the specified association.
     public function show(ProjectDeveloper $projectDeveloper)
     {
         return view('project_developers.show', compact('projectDeveloper'));
@@ -43,14 +44,15 @@ class ProjectDeveloperController extends Controller
         return view('project_developers.edit', compact('projectDeveloper'));
     }
 
-    // Update the specified association in storage.
     public function update(Request $request, ProjectDeveloper $projectDeveloper)
     {
         $validatedData = $request->validate([
             'project_id' => 'required|exists:projects,id',
             'developer_id' => 'required|exists:developers,id',
             'datetime' => 'required|date',
-            'status' => 'required'
+            'status' => 'required',
+            'is_lead' => 'required|boolean',
+
         ]);
 
         $projectDeveloper->update($validatedData);

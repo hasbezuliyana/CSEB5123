@@ -22,7 +22,9 @@ class Project extends Model
     }
     public function developers(): BelongsToMany
     {
-        return $this->belongsToMany(Developer::class, 'project_developers', 'project_id', 'developer_id');
+        return $this->belongsToMany(Developer::class, 'project_developers', 'project_id', 'developer_id')
+        ->using(ProjectDeveloperPivot::class)
+        ->withPivot('is_lead');
     }
     public function reports(): HasMany
     {

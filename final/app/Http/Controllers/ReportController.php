@@ -32,7 +32,8 @@ class ReportController extends Controller
         ]);
 
         Report::create($validatedData);
-        return redirect()->route('reports.index')->with('success', 'Report created successfully.');
+        return redirect()->route('projects.show', ['project' => $validatedData['project_id']])
+            ->with('success', 'Report created successfully.');
     }
 
     // Display the specified report.

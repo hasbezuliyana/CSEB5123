@@ -24,22 +24,30 @@
             @else
                 <ol>
                     @foreach ($project->developers as $developer)
-                        <li>{{ $developer->name }} ({{ $developer->email }})</li>
+                        <li>
+                            @if ($developer->is_lead)
+                                Lead: {{ $developer->name }} ({{ $developer->email }})
+                            @else
+                                Developer: {{ $developer->name }} ({{ $developer->email }})
+                            @endif
+                        </li>
                     @endforeach
                 </ol>
             @endif
 
-            <h2>Related Reports</h2>
+
+            <h2>Project Reports</h2>
             @if ($project->reports->isEmpty())
                 <p>No reports available for this project.</p>
             @else
                 <ol>
                     @foreach ($project->reports as $report)
-                        <li><a href="{{ route('reports.show', ['report' => $report->id]) }}">{{ $report->status }}</a></li>
+                        <li>
+                            {{ $report->status }} - {{ $report->description }}
+                        </li>
                     @endforeach
                 </ol>
             @endif
-
 
             <p><a href="{{ route('reports.create', ['projectId' => $project->id, 'project_name' => $project->project_name]) }}" >Create Report</a></p>
             <p><a href="{{ route('projects.index') }}" >Back to List</a></p>

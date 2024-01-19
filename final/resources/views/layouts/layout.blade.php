@@ -71,32 +71,39 @@
                                 Home
                             </a>
                         </li>
+                        @can('isBusinessUnit')
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('requestform') }}">
+                            <a class="nav-link text-white" href="{{ route('request-form') }}">
                                 Request Form
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" href="{{ route('managers.index') }}">
-                                Manager
-                            </a>
-                        </li>
+                        @endcan
+                        @can('isDeveloper')
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ route('developers.index') }}">
                                 Developers
                             </a>
                         </li>
+                        @endcan
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ route('projects.index') }}">
                                 Projects
                             </a>
                         </li>
-                        </li>
+                        @can('isDeveloper')
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{ route('reports.index') }}">
                                 Reports
                             </a>
                         </li>
+                        @endcan
+                        @can('isManager')
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{{ route('reports.index') }}">
+                                    Reports
+                                </a>
+                            </li>
+                        @endcan
                     </ul>
                 </div>
             </div>

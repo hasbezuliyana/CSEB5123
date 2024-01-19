@@ -17,6 +17,18 @@
         <form action="{{ route('projects.update', $project) }}" method="POST" id="assignForm">
             @csrf
             @method('PUT')
+
+            <h3>Assign Lead Developer</h3>
+            @foreach ($developers as $developer)
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="lead_developer" value="{{ $developer->id }}" id="lead_dev_{{ $developer->id }}">
+                    <label class="form-check-label" for="lead_dev_{{ $developer->id }}">
+                     {{ $developer->name }} ({{ $developer->email }})
+                    </label>
+                </div>
+            @endforeach
+
+            <h3>Assign Developers</h3>
             @foreach ($developers as $developer)
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="developers[]" value="{{ $developer->id }}" id="dev_{{ $developer->id }}">

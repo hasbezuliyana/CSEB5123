@@ -14,9 +14,12 @@ return new class extends Migration
             $table->string('status')->default('completed');;
             $table->foreign('project_id')->references('id')->on('projects');
             $table->foreign('developer_id')->references('id')->on('developers');
-            $table->primary(['project_id', 'developer_id']);
+            $table->boolean('is_lead')->default(false);
             $table->timestamps();
             $table->softDeletes();
+
+            $table->unique(['project_id', 'developer_id']);
+
         });
     }
 

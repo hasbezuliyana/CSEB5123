@@ -2,25 +2,29 @@
 
 @section('content2')
     <div class="container">
-        <h1>Reports</h1>
+        <h1>All Progress Reports</h1>
 
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Project Name</th>
-                <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach ($reports as $report)
+        @if($reports->isEmpty())
+            <p>No reports available.</p>
+        @else
+            <table class="table">
+                <thead>
                 <tr>
-                    <td>{{ $report->project_name }}</td>
-                    <td>
-                        <a href="{{ route('reports.show', ['report' => $report->id]) }}" class="btn btn-info">View</a>
-                    </td>
+                    <th>Project Name</th>
+                    <th>Status</th>
+                    <th>Details</th>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                @foreach ($reports as $report)
+                    <tr>
+                        <td>{{ $report->project->project_name ?? 'N/A' }}</td>
+                        <td>{{ ucwords(str_replace('_', ' ', $report->status)) }}</td>
+                        <td>{{ $report->description }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        @endif
     </div>
 @endsection

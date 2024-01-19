@@ -53,20 +53,24 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $validatedData = $request->validate([
+            'lead_developer' => 'required|exists:developers,id',
             'developers' => 'required|array|max:4',
             'developers.*' => 'exists:developers,id',
         ]);
 
-        $syncData = array_fill_keys($validatedData['developers'], ['status' => 'assigned']);
-        $project->developers()->sync($syncData);
+        $project->developers()->detach();
+
+        $project->developers()->attach($validatedData['lead_developer'], ['is_lead' => true]);
+
+        $otherDevelopers = array_filter($validatedData['developers'], function ($developerId) use ($validatedData) {
+            return $developerId != $validatedData['lead_developer'];
+        });
+
+        $syncData = array_fill_keys($otherDevelopers, ['is_lead' => false]);
+
+        $project->developers()->attach($syncData);
 
         return redirect()->route('projects.show', $project->id)->with('success', 'Developers assigned successfully.');
-    }
-
-    public function destroy(Project $project)
-    {
-        $project->delete();
-        return redirect()->route('projects.index')->with('success', 'Project deleted successfully.');
     }
 }
 
